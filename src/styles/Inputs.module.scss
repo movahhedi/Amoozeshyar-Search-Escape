@@ -1,0 +1,239 @@
+@use "Config" as *;
+
+.formSegment {
+	position: relative;
+	display: block;
+	padding: 32px;
+	border-radius: 10px;
+
+	&::before {
+		content: "";
+		position: absolute;
+		inset: 16px;
+		display: block;
+		/* margin: 160px 0; */
+		padding: 16px;
+		/* border: 4px solid $Color-Body-Light; */
+		/* border: 1px solid $Color-Body-Dark; */
+		border: 1px dashed $Color-Accent-Light;
+		border-radius: 10px;
+		box-sizing: border-box;
+	}
+}
+
+.inputBox {
+	position: relative;
+	display: inline-block;
+	width: fit-content;
+	/* width: 25%; */
+	max-width: 100%;
+	vertical-align: top;
+	margin: 6px 0;
+	padding: 0 8px;
+	box-sizing: border-box;
+
+	@include mobile {
+		width: 100%;
+	}
+}
+
+.inputLabel {
+	display: block;
+	margin: 0 16px 3px;
+	font-size: 0.9rem;
+	font-weight: 500;
+	font-family: inherit;
+	color: $Color-Text-Secondary;
+}
+
+.inputLabelLink {
+	display: inline;
+	margin: 0 16px;
+	font-weight: 400;
+	font-family: inherit;
+	color: $Color-Accent;
+}
+
+.inputText {
+	display: inline-block;
+	width: 100%;
+	padding: 8px 16px;
+	font-size: $Type-Input-Regular;
+	font-family: inherit;
+	color: $Color-Text-Main;
+	background-color: $Color-Body-Light;
+	border: 1px solid $Color-Body-Light;
+	border-radius: 25px;
+	transition: 300ms;
+	box-sizing: border-box;
+
+	&.beCareful {
+		border: 1px dashed $Color-Text-Tertiary-Dark;
+	}
+	&.changed {
+		border-color: $Color-Secondary;
+
+		&.beCareful {
+			border-style: dashed;
+		}
+	}
+	&:disabled,
+	&.disabled {
+		opacity: inherit;
+		border: 1px solid $Color-Text-Tertiary-Dark;
+		cursor: default;
+	}
+}
+
+.inputCheckbox,
+.inputRadio {
+	display: inline-block;
+	width: 100%;
+	box-sizing: border-box;
+	cursor: pointer;
+
+	.checkboxText,
+	.radioText {
+		display: inline-block;
+		vertical-align: middle;
+		margin-inline-start: 5px;
+		font-size: $Type-Input-Regular;
+		font-family: inherit;
+		color: $Color-Text-Main;
+		box-sizing: border-box;
+	}
+	input[type="checkbox"],
+	input[type="radio"] {
+		display: none;
+
+		+ .checkmark {
+			svg {
+				display: none;
+			}
+		}
+		&:checked {
+			&:enabled + .checkmark.beCareful {
+				border-color: $Color-Body-Dark;
+
+				&.changed {
+					border-color: $Color-Body-Dark;
+				}
+			}
+			&:disabled + .checkmark {
+				background: $Color-Text-Tertiary-Dark;
+				border-color: $Color-Text-Tertiary-Dark;
+			}
+			+ .checkmark {
+				background: $Color-Accent;
+
+				&.changed {
+					background: $Color-Secondary;
+				}
+				svg {
+					display: block;
+				}
+			}
+		}
+		&:enabled + .checkmark.beCareful {
+			border-color: $Color-Accent;
+			border-style: dashed;
+
+			&.changed {
+				border-color: $Color-Secondary;
+			}
+		}
+		&:disabled + .checkmark {
+			border-color: $Color-Text-Tertiary-Dark;
+			cursor: default;
+		}
+	}
+	&:hover {
+		input[type="checkbox"],
+		input[type="radio"] {
+			.checkmark {
+				border-color: $Color-Body-Dark;
+			}
+			&:checked:enabled + .checkmark {
+				border-color: $Color-Body-Dark;
+
+				&.beCareful {
+					border-color: $Color-Accent;
+
+					&.changed {
+						border-color: $Color-Secondary;
+					}
+				}
+			}
+			&:enabled + .checkmark {
+				border-color: $Color-Body-Dark;
+
+				&.beCareful {
+					border-color: $Color-Body-Dark;
+
+					&.changed {
+						border-color: $Color-Body-Dark;
+					}
+				}
+			}
+		}
+	}
+	&:active input:is([type="checkbox"], [type="radio"]):enabled {
+		+ .checkmark {
+			background: $Color-Accent;
+			border-color: $Color-Body-Dark;
+
+			&.changed {
+				background: $Color-Secondary;
+				border-color: $Color-Body-Dark;
+			}
+		}
+		&:checked + .checkmark {
+			background: transparent !important;
+			border-color: $Color-Body-Dark;
+		}
+	}
+
+	@include mobile {
+		margin-top: 10px;
+	}
+}
+
+.checkmark {
+	$Size: 24px;
+
+	display: inline-block;
+	width: $Size;
+	height: $Size;
+	aspect-ratio: 1 / 1;
+	vertical-align: middle;
+	background: transparent;
+	border: 2px solid $Color-Accent;
+	border-radius: 20%;
+	transition: 0.2s;
+
+	&.changed {
+		border-color: $Color-Secondary;
+	}
+	&.radiomark {
+		border-radius: 50%;
+	}
+}
+
+.inputInlineButton {
+	position: absolute;
+	top: 50%;
+	left: 0.5em;
+	aspect-ratio: 1 / 1;
+	vertical-align: middle;
+	transform: translateY(-50%);
+	font-size: $Type-Input-Regular;
+	line-height: 0;
+	color: $Color-Accent;
+	background-color: unset;
+	border-radius: 50% 0 0 50%;
+}
+
+.inputTextarea {
+	min-height: 175px;
+	resize: vertical;
+}

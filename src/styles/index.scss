@@ -1,0 +1,112 @@
+/* @use "Config" as *;
+@forward "Reset";
+@forward "Inputs.module.scss";
+@forward "Buttons.module.scss";
+
+html {
+	direction: rtl;
+	font-family: $Font-Persian;
+} */
+
+*,
+*::before,
+*::after {
+	position: relative;
+	min-width: 0;
+	margin: 0;
+	padding: 0;
+	font-family: inherit;
+	// text-decoration: none;
+	border: unset;
+	box-sizing: border-box;
+	list-style-type: none;
+	user-select: none;
+}
+
+html {
+	height: 100%;
+	box-sizing: border-box;
+	scroll-behavior: smooth;
+	direction: rtl;
+	font-family: "Vazirmatn FD", "Vazir FD", "Vazirmatn", "Vazir", sans-seri;
+}
+
+body {
+	display: block;
+	height: 100%;
+	box-sizing: border-box;
+}
+
+#app {
+	width: 100%;
+	height: 100%;
+	padding-bottom: 50px;
+}
+
+#boxes {
+	display: grid;
+	grid-template: "input output" 1fr/1fr 1fr;
+	gap: 20px;
+	min-height: 60%;
+	margin: 10px 40px;
+
+	@media only screen and (max-width: 500px) {
+		grid-template: "input" 1fr "output" 1fr/1fr;
+		min-height: 80%;
+	}
+}
+
+h1 {
+	padding-top: 40px;
+	text-align: center;
+}
+
+.box {
+	display: grid;
+	grid-template: "title" auto "textarea" 1fr "copy" auto/1fr;
+	gap: 10px;
+	height: 100%;
+
+	&.inputBox {
+		grid-area: input;
+	}
+	&.outputBox {
+		grid-area: output;
+	}
+
+	h2 {
+		place-self: center;
+	}
+}
+
+textarea {
+	background-color: #eee;
+	grid-area: textarea;
+	appearance: none;
+	padding: 13px;
+	border-radius: 20px;
+}
+
+.copyButton {
+	grid-area: copy;
+	width: fit-content;
+	background-color: #007fff;
+	border-radius: 50px;
+	padding: 10px 20px;
+	color: white;
+	font-weight: 500;
+	place-self: center;
+	cursor: pointer;
+}
+
+.copyright {
+	position: fixed;
+	bottom: 10px;
+	text-align: center;
+	width: 100%;
+	a {
+		color: #007fff;
+		text-decoration: none;
+		border-bottom: #007fff 1px solid;
+	}
+}
